@@ -1,0 +1,49 @@
+# Created by http://gitignore.io
+
+### Scala ###
+*.class
+*.log
+
+# sbt specific
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# Scala-IDE specific
+.scala_dependencies
+
+### Java ###
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+### IntelliJ ###
+*.iml
+*.ipr
+*.iws
+.idea/
+
+### SBT ###
+# SBT .gitignore
+# recommended: http://www.scala-sbt.org/release/docs/Getting-Started/Directories.html#configuring-version-control
+
+target/
+lib_managed/
+src_managed/
+project/boot/
+
+
+### Linux ###
+.*
+!.gitignore
+!.git*
+*~
+
+### extra ###
+activemq-data

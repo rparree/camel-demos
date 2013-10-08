@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+
+    <bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
+        <property name="connectionFactory">
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                <property name="brokerURL" value="vm://mybroker"/>
+            </bean>
+        </property>
+    </bean>
+
+
+    <!--see http://activemq.apache.org/xml-configuration.html-->
+    <broker xmlns="http://activemq.apache.org/schema/core" useShutdownHook="false" useJmx="true"  brokerName="mybroker" dataDirectory="target/activemq-data">
+
+        <transportConnectors>
+            <!-- vm transport for intra-jvm communication -->
+            <transportConnector name="vm" uri="vm://myBroker"/>
+            <!-- tcp for external communication -->
+            <transportConnector name="tcp" uri="tcp://0.0.0.0:61616"/>
+        </transportConnectors>
+    </broker>
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <route>
+            <!--"file:./target/scala-2.10/classes/camel/in" log("received file") to
+    "jms:queue/IncomingOrders"
+-->
+            <from uri="file:./target/scala-2.10/classes/camel/in"/>
+            <log message="Received file: ${body}"/>
+            <to uri="jms:queue/IncomingOrders"/>
+        </route>
+        <route>
+            <from uri="jms:queue/IncomingOrders"/>
+            <log message="Message received on JMS incoming orders: ${body}"/>
+        </route>
+    </camelContext>
+</beans>
