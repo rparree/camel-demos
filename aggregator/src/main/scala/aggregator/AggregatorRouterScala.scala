@@ -10,23 +10,16 @@ import grizzled.slf4j.Logging
  */
 class AggregatorRouterScala extends RouteBuilder with Logging {
 
-  @BeanProperty
-  var inDir: String = _
+  "file:./target/scala-2.10/classes/camel/in" ==> {
+      convertBodyTo(classOf[String])
 
-  @BeanProperty
-  var toDir: String = _
-  info("Version")
-  // "file:./target/test-classes/camel/in" to ("file:./target/test-classes/camel/out")
-  "file:./target/test-classes/camel/in" ==> {
-    convertBodyTo(classOf[String])
+      aggregate(
+        xpath("/item/@id"),
+        new BodyAppenderAggregator()
 
-    aggregate(
-      _.xpath("/item/@id"),
-      new BodyAppenderAggregator()
-    ).completionTimeout(1000) {
-      to("file:./target/test-classes/camel/out")
-    }
-
+      ).completionTimeout(1000) {
+        to("file:./target/scala-2.10/classes/camel/out")
+      }
   }
 
 
