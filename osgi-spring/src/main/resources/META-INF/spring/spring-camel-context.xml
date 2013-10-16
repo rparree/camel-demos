@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+
+    <bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
+        <property name="connectionFactory">
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                <property name="brokerURL" value="vm://localhost"/>
+                <property name="userName" value="smx"/>
+                <property name="password" value="smx"/>
+            </bean>
+        </property>
+    </bean>
+
+
+
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring" trace="true">
+        <propertyPlaceholder id="properties" location=""/>
+        <route>
+            <!--"file:./target/scala-2.10/classes/camel/in" log("received file") to
+    "jms:queue/IncomingOrders"
+-->
+            <from uri="file:/home/rparree/tmp//camel/in"/>
+            <log message="Received file: ${body}"/>
+            <to uri="jms:queue/IncomingOrders"/>
+        </route>
+        <route>
+            <from uri="jms:queue/IncomingOrders"/>
+            <log message="Message received on JMS incoming orders: ${body}"/>
+        </route>
+    </camelContext>
+</beans>
