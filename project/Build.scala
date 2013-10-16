@@ -4,7 +4,7 @@ import Keys._
 object SbtMultiBuild extends Build {
 
   val log4j = "log4j" % "log4j" % "1.2.16"
-  val camel = Seq("camel-core", "camel-scala", "camel-test", "camel-jms", "camel-spring").map("org.apache.camel" % _ % "2.12.0")
+  val camel = Seq("camel-core", "camel-scala", "camel-test", "camel-jetty","camel-jms", "camel-spring").map("org.apache.camel" % _ % "2.12.0")
   val slf4j = Seq("slf4j-api", "slf4j-log4j12").map("org.slf4j" % _ % "1.6.1")
   val activeMQ = Seq("activemq-core", "activemq-spring").map("org.apache.activemq" % _ % "5.7.0") ++ Seq("org.apache.xbean" % "xbean-spring" % "3.7")
   val grizzled = "org.clapper" %% "grizzled-slf4j" % "1.0.1"
@@ -15,30 +15,32 @@ object SbtMultiBuild extends Build {
     Seq(
       fork in run := true,
       scalaVersion := "2.10.3",
-      version := "1.1"
+      version := "1.1",
+      publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository"))),
+      organization := "com.edc4it.demos.camel"
+
+
 
     )
 
   lazy val parent = Project(id = "camel-demos-scala-parent",
     base = file(".")
-  ) aggregate(simpleJMS, springJMS, aggregator)
+  ) aggregate(common, simpleFile, simpleJMS, springJMS, aggregator, parallelMulticast, osgiSpring, http)
 
-  lazy val simpleJMS = Project(id = "simple-jms",
-    base = file("simple-jms"),
-    settings = Project.defaultSettings ++ Seq(
-      libraryDependencies ++= libraries
-    )
-  )
+  lazy val common= addProject("common")
 
-  lazy val springJMS = Project(id = "spring-jms",
-    base = file("spring-jms"),
-    settings = Project.defaultSettings ++ Seq(
-      libraryDependencies ++= libraries
-    )
-  )
-  
-  lazy val aggregator = Project(id = "aggregator",
-    base = file("aggregator"),
+  lazy val simpleFile = addProject("simple-file") dependsOn(common)
+  lazy val simpleJMS = addProject("simple-jms")
+  lazy val springJMS = addProject("spring-jms")
+  lazy val aggregator = addProject("aggregator")
+  lazy val parallelMulticast= addProject("parallelMulticast") dependsOn (common)
+  lazy val osgiSpring = addProject("osgi-spring")
+  lazy val http = addProject("http") dependsOn(common)
+
+
+
+  def addProject(dirName : String) = Project(id = dirName,
+    base = file(dirName),
     settings = Project.defaultSettings ++ Seq(
       libraryDependencies ++= libraries
     )

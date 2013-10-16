@@ -19,18 +19,13 @@
     <broker xmlns="http://activemq.apache.org/schema/core" useShutdownHook="false" useJmx="true"  brokerName="mybroker" dataDirectory="target/activemq-data">
 
         <transportConnectors>
-            <!-- vm transport for intra-jvm communication -->
             <transportConnector name="vm" uri="vm://myBroker"/>
-            <!-- tcp for external communication -->
             <transportConnector name="tcp" uri="tcp://0.0.0.0:61616"/>
         </transportConnectors>
     </broker>
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <route>
-            <!--"file:./target/scala-2.10/classes/camel/in" log("received file") to
-    "jms:queue/IncomingOrders"
--->
             <from uri="file:./target/scala-2.10/classes/camel/in"/>
             <log message="Received file: ${body}"/>
             <to uri="jms:queue/IncomingOrders"/>
