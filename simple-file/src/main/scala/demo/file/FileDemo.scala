@@ -14,7 +14,7 @@ object FileDemo extends  App {
  
   // setup camel context
   val context = new DefaultCamelContext()
-  //context.setTracing(true)
+  context.setTracing(true)
   context.addRoutes(new FileDemoRouteBuilder())
 
   // Start and then stop the context

@@ -19,7 +19,7 @@ public class FileDemoTest extends CamelTestSupport {
 
     @Test
     public void testName() throws Exception {
-        template.sendBodyAndHeader("file:./target/scala-2.10/classes/camel/in", "hi", Exchange.FILE_NAME, "hello.txt");
+        template.sendBodyAndHeader("file:./target/scala-2.10/classes/camel/in", "hi", Exchange.FILE_NAME, "hello-with-hi.txt");
         Thread.sleep(15000);
 
 
