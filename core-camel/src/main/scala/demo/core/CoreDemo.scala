@@ -1,4 +1,4 @@
-package demo.file
+package demo.core
 
 import org.apache.camel.impl.DefaultCamelContext
 
@@ -8,7 +8,7 @@ import java.nio.file.{FileSystems, Files}
 /**
  * todo  
  */
-object FileDemo extends  App {
+object CoreDemo extends  App {
 
 
   if (!Files.exists(FileSystems.getDefault.getPath("target", "scala-2.10", "classes", "camel", "in","file1.xml")))
@@ -17,7 +17,7 @@ object FileDemo extends  App {
   // setup camel context
   val context = new DefaultCamelContext()
   context.setTracing(true)
-  context.addRoutes(new FileDemoRouteBuilder())
+  context.addRoutes(new CoreDemoRouteBuilder())
 
   // Start and then stop the context
   context.start()

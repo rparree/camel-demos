@@ -1,4 +1,4 @@
-package demo.file
+package demo.core
 
 import org.apache.camel.Message
 import grizzled.slf4j.Logging
