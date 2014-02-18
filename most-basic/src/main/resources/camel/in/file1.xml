@@ -1,0 +1,4 @@
+<order customer="12">
+    <item sku="122-121" amount="10"/>
+    <item sku="982-293" amount="4"/>
+</order>
