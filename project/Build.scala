@@ -29,9 +29,9 @@ object SbtMultiBuild extends Build {
 
   lazy val common= addProject("common")
 
-  lazy val simpleFile = addProject("simple-file") dependsOn(common)
-  lazy val simpleJMS = addProject("simple-jms")
-  lazy val springJMS = addProject("spring-jms")
+  lazy val simpleFile = addProject("core-camel") dependsOn(common)
+  lazy val simpleJMS = addProject("simple-jms") 
+  lazy val springJMS = addProject("spring-jms") dependsOn (common)
   lazy val aggregator = addProject("aggregator")
   lazy val parallelMulticast= addProject("parallelMulticast") dependsOn (common)
   lazy val osgiSpring = addProject("osgi-spring")
