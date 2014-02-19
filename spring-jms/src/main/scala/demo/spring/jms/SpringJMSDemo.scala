@@ -10,7 +10,7 @@ object SpringJMSDemo extends App{
   val m  = new Main()
   m.setApplicationContextUri("spring-camel-context.xml")
   m.enableHangupSupport()
-  m.start()
+  m.run()
 
 
 }

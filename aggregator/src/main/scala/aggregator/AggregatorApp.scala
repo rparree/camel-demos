@@ -3,37 +3,22 @@ package aggregator
 import org.apache.camel.spring.Main
 import java.io.File
 import grizzled.slf4j.Logging
+import java.nio.file.{FileSystems, Files}
 
 /**
  * todo  
  */
 object AggregatorApp extends App with Logging {
 
+  if (!Files.exists(FileSystems.getDefault.getPath("target", "scala-2.10", "classes", "camel", "in","file1.xml")))
+    sys.error("wrong working directory")
 
-
-
-  checkFiles()
   val m = new Main()
   m.setApplicationContextUri("spring-camel-context.xml")
- // m.enableHangupSupport()
+  m.enableHangupSupport()
   m.setDuration(10000)
-  m.start()
+  m.run()
 
-  Thread.sleep(10000)
-
-
-  def checkFiles() = {
-    val targetDir: File = new File("target")
-    if (!targetDir.isDirectory) {
-      error("Wrong working Directory" + new File(".").getCanonicalPath)
-      sys.exit(0)
-    } else {
-      val scalaTargetDir = new File(targetDir, "scala-2.10")
-      if (!scalaTargetDir.isDirectory) {
-        error("this demo has the sbt output directory hard-coded in the endpoints, check the output directory")
-        sys.exit(0)
-      }
-
-    }
-  }
+  
+  
 }
