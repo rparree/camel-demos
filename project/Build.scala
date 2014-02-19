@@ -4,7 +4,7 @@ import Keys._
 object SbtMultiBuild extends Build {
 
   val log4j = "log4j" % "log4j" % "1.2.16"
-  val camel = Seq("camel-core", "camel-scala", "camel-test", "camel-jetty","camel-jms", "camel-spring").map("org.apache.camel" % _ % "2.12.0")
+  val camel = Seq("camel-core", "camel-scala", "camel-test", "camel-jetty","camel-jms", "camel-spring", "camel-ftp").map("org.apache.camel" % _ % "2.12.0")
   val slf4j = Seq("slf4j-api", "slf4j-log4j12").map("org.slf4j" % _ % "1.6.1")
   val activeMQ = Seq("activemq-core", "activemq-spring").map("org.apache.activemq" % _ % "5.7.0") ++ Seq("org.apache.xbean" % "xbean-spring" % "3.7")
   val grizzled = "org.clapper" %% "grizzled-slf4j" % "1.0.1"
@@ -31,6 +31,7 @@ object SbtMultiBuild extends Build {
   lazy val simpleFile = addProject("most-basic") dependsOn(common)
   lazy val coreCamel = addProject("core-camel") dependsOn(common)
   lazy val simpleSpring = addProject("simple-spring") dependsOn(common)
+  lazy val simpleFTP = addProject("simple-ftp") dependsOn(common)
   lazy val splitter = addProject("splitter") dependsOn(common)
   lazy val simpleJMS = addProject("simple-jms") 
   lazy val springJMS = addProject("spring-jms") dependsOn (common)
