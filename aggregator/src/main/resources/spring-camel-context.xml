@@ -10,10 +10,7 @@
        <routeBuilder ref="sampleAggregatorScala"/>
     </camelContext>
 
-    <bean id="sampleAggregatorScala" class="aggregator.AggregatorRouterScala">
-
-    </bean>
-
+    <bean id="sampleAggregatorScala" class="aggregator.AggregatorRouterScala"/>
 
     <bean id="sampleAggregatorJava" class="org.demo.AggregatorRouterJava"/>
 </beans>

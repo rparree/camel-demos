@@ -11,7 +11,7 @@ import grizzled.slf4j.Logging
 class AggregatorRouterScala extends RouteBuilder with Logging {
 
   "file:./target/scala-2.10/classes/camel/in" ==> {
-      convertBodyTo(classOf[String])
+      convertBodyTo(classOf[org.w3c.dom.Document])
 
       aggregate(
         xpath("/item/@id"),
