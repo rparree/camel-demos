@@ -40,7 +40,7 @@ object SbtMultiBuild extends Build {
   lazy val aggregator = addProject("aggregator")
   lazy val parallelMulticast= addProject("parallelMulticast") dependsOn (common)
   lazy val osgiSpring = addProject("osgi-spring")
-  lazy val http = addProject("http") dependsOn(common)
+  lazy val http = addProject("netty-http") dependsOn(common)
 
 
 
