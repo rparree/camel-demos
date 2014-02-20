@@ -13,7 +13,7 @@ object SedaDemo extends  App {
 
   val m = new Main
   val context = new DefaultCamelContext()
-  //context.addComponent("netty",)
+
   m.addRouteBuilder(new org.apache.camel.scala.dsl.builder.RouteBuilder(){
     "netty:tcp://0.0.0.0:7090?textline=true&sync=true" log "received ${body}" to "seda:a"
 
