@@ -41,6 +41,7 @@ object SbtMultiBuild extends Build {
   lazy val parallelMulticast= addProject("parallelMulticast") dependsOn (common)
   lazy val osgiSpring = addProject("osgi-spring")
   lazy val http = addProject("jetty-http") dependsOn(common)
+  lazy val pipelineProcessorsInout = addProject("pipeline-processors-inout") dependsOn(common)
 
 
 
