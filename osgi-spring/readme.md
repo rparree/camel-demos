@@ -1,5 +1,5 @@
 
-## Instructions for the **osgi-spring** example
+## Instructions for the **osgi-spring** example on Karaf
  
  1. First create the OSGI Bundle using SBT
   Before you build, you might want to change the location of in the file inbox (by default it is set to `file:/tmp/camel/in` in `spring-camel-context.xml`)
@@ -44,3 +44,50 @@ If you would add Scala code make sure you install the Scala Bundle in Fuse:
 ```bash
  JBossFuse:karaf@root> osgi:install "mvn:org.scala-lang/scala-library/2.10.3"
  ```
+
+## Creating and deploying a fabric profile
+
+ 1. First let's create the fabric container
+  ```bash
+  JBossFuse:karaf@root> fabric:create 
+  Using specified zookeeper password:smx
+  ```
+
+ 2.  Then create a new profile (parent is `camel-jms` as this demo uses JMS and AMQ)
+  
+  ```bash
+  JBossFuse:karaf@root> fabric:profile-create --parents camel-jms fabric-demo
+  ```
+
+ 3. Then add the OSGI bundle to the profile (refencing the bundle created using SBT)
+
+ ```bash
+ JBossFuse:karaf@root> fabric:profile-edit --bundles "file:/.../osgi-spring_2.10-1.1.jar" fabric-demo
+ ```
+
+  4. Then deploy the profile to the container (using root container here)
+
+  ```bash
+  JBossFuse:karaf@root> fabric:container-add-profile root fabric-demo
+  ```
+
+### Tip: Install the "Fabric Management Console
+
+Install the FMC and an admin user
+
+```bash
+JBossFuse:karaf@root> fabric:container-add-profile  root fmc
+JBossFuse:karaf@root> jaas:realms 
+Index Realm                Module Class                                                                    
+    1 karaf                org.apache.karaf.jaas.modules.properties.PropertiesLoginModule                  
+    2 karaf                org.apache.karaf.jaas.modules.publickey.PublickeyLoginModule                    
+    3 karaf                org.fusesource.fabric.jaas.ZookeeperLoginModule        
+JBossFuse:karaf@root> jaas:manage --index 3
+JBossFuse:karaf@root> jaas:useradd jenny masterkey
+JBossFuse:karaf@root> jaas:roleadd jenny admin
+JBossFuse:karaf@root> jaas:update
+```
+
+Then go to [http://localhost:8181/](http://localhost:8181/) and login with jenny/masterkey
+
+
