@@ -22,10 +22,7 @@
     <camelContext xmlns="http://camel.apache.org/schema/spring" trace="true">
         <propertyPlaceholder id="properties" location=""/>
         <route>
-            <!--"file:./target/scala-2.10/classes/camel/in" log("received file") to
-    "jms:queue/IncomingOrders"
--->
-            <from uri="file:/home/rparree/tmp//camel/in"/>
+            <from uri="file:/tmp/camel/in"/>
             <log message="Received file: ${body}"/>
             <to uri="jms:queue/IncomingOrders"/>
         </route>
