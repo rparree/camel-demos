@@ -35,13 +35,14 @@ Loading ...
  ```bash
  me@my-linux> curl -H "Content-Type: text/plain" --data "hello"  http://localhost:9090/myapp/myservice
  ```
- 10. **cxf-jaxws-spring**: CXF example processing JAX-WS SOAP/HTTP message to JSON/FILE (wsdl available at http://localhost:9090/demo?wsdl)
- 11 . **cxfbean-jaxrs**; Simple cxfbean demo implementing a JAXRS services (test url http://localhost:9090/example/calc/10 )
- 12. **pipeline-processors-inout**: Illustrates the behaviour of setting the `in` or `out` bodies on pipeline processors (only contains a "unit test")
- 13. **simple-jms**: Uses invm JMS (also shows CBR to route xml and csv files)
- 14. **spring-jms** Illustrates configuration of JMS in Spring
- 15. **parallelMulticast**: Illustrated (parallel) multicast. A Java version is also included
- 16. **osgi-spring**. This demo has its own  ([readme](osgi-spring/readme.md))
+ 10. **cxf-spring**: CXF example processing JAX-WS SOAP/HTTP message to JSON/FILE (wsdl available at http://localhost:9090/demo?wsdl)
+ 11. **cxfrs**: CXFRS demo. Consumes/Produces XML or JSON. CURL commands available in `src/test/bash` directory
+ 12. **cxfbean-jaxrs**; Simple cxfbean demo implementing a JAXRS services (test url http://localhost:9090/example/calc/10 )
+ 13. **pipeline-processors-inout**: Illustrates the behaviour of setting the `in` or `out` bodies on pipeline processors (only contains a "unit test")
+ 14. **simple-jms**: Uses invm JMS (also shows CBR to route xml and csv files)
+ 15. **spring-jms** Illustrates configuration of JMS in Spring
+ 16. **parallelMulticast**: Illustrated (parallel) multicast. A Java version is also included
+ 17. **osgi-spring**. This demo has its own  ([readme](osgi-spring/readme.md))
 
 
 
