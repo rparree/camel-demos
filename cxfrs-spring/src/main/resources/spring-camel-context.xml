@@ -1,0 +1,26 @@
+<spring:beans xmlns:spring="http://www.springframework.org/schema/beans"
+       xmlns="http://camel.apache.org/schema/spring"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+          http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+
+    <cxf:rsServer id="rsServer" 
+                  address="http://localhost:9090/"
+                  serviceClass="demo.cxfrs.DemoResource"
+                  loggingFeatureEnabled="true" 
+                  loggingSizeLimit="20" 
+                  skipFaultLogging="true"/>
+
+    <!--suppress UnparsedCustomBeanInspection -->
+    <camelContext>
+
+       <package>demo.cxfrs</package>
+    </camelContext>
+
+
+</spring:beans>

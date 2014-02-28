@@ -2,7 +2,7 @@ import sbt._
 import Keys._
 
 object SbtMultiBuild extends Build {
-  val camelArtifact = (artifact: String) => "org.apache.camel" % artifact % "2.12.0"
+  val camelArtifact = (artifact: String) => "org.apache.camel" % artifact % "2.12.2"
 
   val log4j = "log4j" % "log4j" % "1.2.16"
   val camel = Seq("camel-core", "camel-scala", "camel-test","camel-test-spring", 
@@ -31,7 +31,8 @@ object SbtMultiBuild extends Build {
   lazy val parent = Project(id = "camel-demos-scala-parent",
     base = file(".")
   ) aggregate(common, simpleFile, coreCamel, simpleSpring, simpleFTP, splitter, simpleJMS, springBean, sedaInOut,
-    springJMS, simpleJMS, aggregator, parallelMulticast, osgiSpring, http, pipelineProcessorsInout, cxfJAXWSSpring, cxfbeanJAXRS  )
+    springJMS, simpleJMS, aggregator, parallelMulticast, osgiSpring, http, pipelineProcessorsInout,
+    cxfJAXWSSpring, cxfbeanJAXRS, cxfrs  )
 
   lazy val common= addProject("common")
   lazy val simpleFile = addProject("most-basic") dependsOn common
@@ -48,9 +49,9 @@ object SbtMultiBuild extends Build {
   lazy val osgiSpring = addProject("osgi-spring")
   lazy val http = addProject("jetty-http") settings(libraryDependencies += camelJetty)  dependsOn  common
   lazy val pipelineProcessorsInout = addProject("pipeline-processors-inout") settings(libraryDependencies += camelJetty) dependsOn  common
-  lazy val cxfJAXWSSpring = addProject("cxf-jaxws-spring") settings(libraryDependencies ++= Seq(cxfExtra,xmljson)) dependsOn  common
+  lazy val cxfJAXWSSpring = addProject("cxf-spring") settings(libraryDependencies ++= Seq(cxfExtra,xmljson)) dependsOn  common
   lazy val cxfbeanJAXRS = addProject("cxfbean-jaxrs") settings(libraryDependencies += camelJetty) dependsOn  common
-
+  lazy val cxfrs = addProject("cxfrs-spring") settings(libraryDependencies ++= Seq(cxfExtra, "org.apache.cxf" % "cxf-bundle-jaxrs" % "2.7.6", "org.codehaus.jettison" % "jettison" % "1.3.4") ) dependsOn  common
 
 
 

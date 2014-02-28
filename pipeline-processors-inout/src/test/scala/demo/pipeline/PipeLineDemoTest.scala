@@ -8,9 +8,6 @@ import grizzled.slf4j.Logging
 import org.apache.camel.{Exchange, Service}
 import org.apache.camel.impl.DefaultCamelContext
 
-/**
- * Created by rparree on 20/02/14.
- */
 class PipeLineDemoTest extends CamelTestSupport with Logging{
 
 

@@ -5,9 +5,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-/**
- * Created by rparree on 10/16/13.
- */
 public class CoreDemoTest extends CamelTestSupport {
 
     @Override
