@@ -1,0 +1,30 @@
+<spring:beans xmlns:spring="http://www.springframework.org/schema/beans"
+       xmlns="http://camel.apache.org/schema/spring"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+          http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+    <camelContext>
+        <dataFormats >
+            <json id="jack" library="Jackson"/>
+        </dataFormats>
+        
+        <route>
+            <from uri="cxf:bean:demoEndpoint"/>
+             <transform>
+                <simple>${in.body[0]}</simple>
+            </transform>
+            <marshal ref="jack"/>
+            <to uri="file:/tmp/camel/out"/> 
+        </route>
+    </camelContext>
+
+    <!--suppress UnparsedCustomBeanInspection -->
+    <cxf:cxfEndpoint id="demoEndpoint"
+                     address="http://localhost:9090/demo"
+                     serviceClass="demo.cxf.DemoEndpoint"/>
+</spring:beans>
