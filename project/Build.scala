@@ -51,7 +51,7 @@ object SbtMultiBuild extends Build {
   lazy val pipelineProcessorsInout = addProject("pipeline-processors-inout") settings(libraryDependencies += camelJetty) dependsOn  common
   lazy val cxfJAXWSSpring = addProject("cxf-spring") settings(libraryDependencies ++= Seq(cxfExtra,xmljson)) dependsOn  common
   lazy val cxfbeanJAXRS = addProject("cxfbean-jaxrs") settings(libraryDependencies += camelJetty) dependsOn  common
-  lazy val cxfrs = addProject("cxfrs-spring") settings(libraryDependencies ++= Seq(cxfExtra, "org.apache.cxf" % "cxf-bundle-jaxrs" % "2.7.6", "org.codehaus.jettison" % "jettison" % "1.3.4") ) dependsOn  common
+  lazy val cxfrs = addProject("cxfrs") settings(libraryDependencies ++= Seq(cxfExtra, "org.apache.cxf" % "cxf-bundle-jaxrs" % "2.7.6", "org.codehaus.jettison" % "jettison" % "1.3.4") ) dependsOn  common
 
 
 

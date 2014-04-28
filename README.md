@@ -25,7 +25,7 @@ Loading ...
 
  1. **most-basic**: One of the most basic "Hello World"-type of demos.
  2. **simple-spring**: Similar "Hello World" using Spring
- 3. **core-camel**: Similar to **most-basic**, but shows the default single-thread behaviour (tip surround the steps in `threads(5) { ... }`) and includes a unit test.  
+ 3. **core-camel**: Similar to **most-basic**, but shows the default single-thread behaviour (tip surround the steps in `threads(5) { ... }`) or add `?concurrentConsumers=5` to teh URI and includes a unit test.  
  4. **splitter**: Simple demo using xpath based splitter
  5. **aggregator**: Aggregates an XML message. There is also a Java implementation of the same route, just change the Spring configuration to use the Java equivalent
  6. **simple-ftp**: Idempotent ftp consumer
