@@ -10,7 +10,6 @@
         <route>
             <from uri="file:./target/scala-2.10/classes/camel/in"/>
             <log message="Received file: ${body}"/>
-            <!-- <to uri="file:./target/scala-2.10/classes/camel/out"/> -->
         </route>
     </camelContext>
 </beans>

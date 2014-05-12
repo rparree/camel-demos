@@ -11,7 +11,7 @@ import java.nio.file.{FileSystems, Files}
 object FileDemo extends  App {
 
 
-  if (!Files.exists(FileSystems.getDefault.getPath("target", "scala-2.10", "classes", "camel", "in","file1.xml")))
+  if (!Files.exists(FileSystems.getDefault.getPath("target", "scala-2.10", "classes", "camel", "in")))
     sys.error("wrong working directory")
 
   // setup camel context
@@ -20,7 +20,7 @@ object FileDemo extends  App {
 
   // Start and then stop the context
   context.start()
-  Thread.sleep(5000)
+  Thread.sleep(500000)
   context.stop()
 
 }

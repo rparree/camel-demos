@@ -14,7 +14,8 @@ object HttpApp extends App {
   val context = new DefaultCamelContext()
   context.setStreamCaching(true)
   context.addRoutes(new org.apache.camel.scala.dsl.builder.RouteBuilder(){
-    "jetty:http://localhost:9090/myapp/myservice"  log "received ${body}"  process(e => e.getOut.setBody("wow thanks!"))
+    "jetty:http://localhost:9090/myapp/myservice"  log "received ${body}"  process(e => e.getOut.setBody(e.getIn.getBody(classOf[String]).toUpperCase))
+    
   })
 
   context.start()
