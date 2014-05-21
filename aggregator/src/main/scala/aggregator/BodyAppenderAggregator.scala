@@ -11,10 +11,10 @@ import org.w3c.dom.bootstrap.DOMImplementationRegistry
  * todo  
  */
 class BodyAppenderAggregator extends AggregationStrategy with Logging {
-  def aggregate(oldExchange: Exchange, newExchange: Exchange) = {
-    info("Old: " + (if (oldExchange == null) "null" else oldExchange.getIn.getBody(classOf[String])) + ", New: " + newExchange.getIn.getBody(classOf[String]))
+  def aggregate(aggregatedMsg: Exchange, newExchange: Exchange) = {
+    info("Old: " + (if (aggregatedMsg == null) "null" else aggregatedMsg.getIn.getBody(classOf[String])) + ", New: " + newExchange.getIn.getBody(classOf[String]))
 
-    if (oldExchange == null) {
+    if (aggregatedMsg == null) {
       // Initialise DOM 3
       val registry = DOMImplementationRegistry.newInstance
       val domImpl = registry.getDOMImplementation("XML 3.0")
@@ -32,12 +32,12 @@ class BodyAppenderAggregator extends AggregationStrategy with Logging {
     }
     else {
       // Get the aggregated Document from the previous exchange
-      val doc = oldExchange.getIn.getBody(classOf[org.w3c.dom.Document])
+      val doc = aggregatedMsg.getIn.getBody(classOf[org.w3c.dom.Document])
       // Create a copy of the newly received item
       val newItem = doc.importNode(newExchange.getIn.getBody(classOf[Document]).getDocumentElement,true)
       //Append the item to the aggregated document
       doc.getDocumentElement.appendChild(newItem)
-      oldExchange
+      aggregatedMsg
     }
   }
 }
