@@ -2,21 +2,23 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
-           xsi:schemaLocation="http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint-2.12.2.xsd">
+           xsi:schemaLocation="http://camel.apache.org/schema/blueprint 
+           http://camel.apache.org/schema/blueprint/camel-blueprint-2.12.2.xsd">
 
 
-    <!-- etc/camel-demo.cfg -->
-    <cm:property-placeholder persistent-id="camel-demo"/>
+    <cm:property-placeholder persistent-id="camel-demo">
+        <cm:default-properties>
+            <cm:property name="uriSystemA" value="file:/tmp/camel/out"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
 
     <camelContext xmlns="http://camel.apache.org/schema/blueprint" streamCache="true">
-        
-        <package>demo.blueprint.routes</package>
         <route>
-            <from uri="jetty:http://localhost:9090/myapp/myservice"/>
+            <from uri="jetty:http://localhost:9090/myservice"/>
             <transform>
                 <simple>${in.body}@work.com</simple>
             </transform>
-            <to uri="{{systemA}}"/>
+            <to uri="{{uriSystemA}}"/>
         </route>
     </camelContext>
     

@@ -43,7 +43,7 @@ Loading ...
  15. **spring-jms** Illustrates configuration of JMS in Spring
  16. **parallelMulticast**: Illustrated (parallel) multicast. A Java version is also included
  17. **osgi-spring**. This demo has its own  ([readme](osgi-spring/readme.md))
- 18. **blueprint** Non OSGI blueprint demo. Includes a test using mocks
+ 18. **blueprint** Simple Camel blueprint demo with inlined route. Includes a test using mocks
 
 
 
