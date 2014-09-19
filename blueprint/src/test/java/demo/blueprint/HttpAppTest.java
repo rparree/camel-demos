@@ -15,7 +15,7 @@ public class HttpAppTest extends CamelBlueprintTestSupport {
 
     @Override
     protected String getBlueprintDescriptor() {
-        return "config.xml";
+        return "/OSGI-INF/blueprint/config.xml";
     }
 
     @SuppressWarnings("unchecked")
