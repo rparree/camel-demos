@@ -17,7 +17,7 @@
  
  2. Set the JMS username and password in Fuse for AMQ: add `smx=smx` to `etc/user.properties`
 
- 3. Start the Fuse Runtime, install JMS and install the demo OSGI bundle (`/home/me/course/camel-demos/osgi-spring/target/scala-2.10/osgi-spring_2.10-1.1.jar`)
+ 3. Start the Fuse Runtime, install JMS and install the demo OSGI bundle (`/home/me/course/camel-demos/osgi-spring/target/osgi-spring_2.10-1.1.jar`)
 
  ```bash
  ~/opt/jboss-fuse-6.0.0$ bin/fuse
@@ -25,7 +25,7 @@
  100% [========================================================================]
  ...
  JBossFuse:karaf@root> features:install camel-jms
- JBossFuse:karaf@root> osgi:install -s "file:/.../scala-2.10/osgi-spring_2.10-1.1.jar"
+ JBossFuse:karaf@root> osgi:install -s "file:/.../osgi-spring_2.10-1.1.jar"
  Bundle ID: 234
 
  ```

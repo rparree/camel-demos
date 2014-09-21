@@ -15,7 +15,7 @@ class BeanComponentTest extends  org.apache.camel.test.spring.CamelSpringTestSup
                  |        <item sku="982-293" amount="4"/>
                  |</order>"""
 
-    template.sendBodyAndHeader("file:./target/scala-2.10/classes/camel/in", body, Exchange.FILE_NAME, "file1.xml")
+    template.sendBodyAndHeader("file:./target/classes/camel/in", body, Exchange.FILE_NAME, "file1.xml")
     Thread.sleep(10000)
   }
 

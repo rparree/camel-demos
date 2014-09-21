@@ -10,7 +10,7 @@ import java.nio.file.{FileSystems, Files}
  */
 object AggregatorApp extends App with Logging {
 
-  if (!Files.exists(FileSystems.getDefault.getPath("target", "scala-2.10", "classes", "camel", "in","file1.xml")))
+  if (!Files.exists(FileSystems.getDefault.getPath("target", "classes", "camel", "in","file1.xml")))
     sys.error("wrong working directory")
 
   val m = new Main()

@@ -10,7 +10,7 @@ import grizzled.slf4j.Logging
  */
 class AggregatorRouterScala extends RouteBuilder with Logging {
 
-  "file:./target/scala-2.10/classes/camel/in" ==> {
+  "file:./target/classes/camel/in" ==> {
       convertBodyTo(classOf[org.w3c.dom.Document])
 
       aggregate(
@@ -18,7 +18,7 @@ class AggregatorRouterScala extends RouteBuilder with Logging {
         new BodyAppenderAggregator()
 
       ).completionTimeout(1000) {
-        to("file:./target/scala-2.10/classes/camel/out")
+        to("file:./target/classes/camel/out")
       }
   }
 

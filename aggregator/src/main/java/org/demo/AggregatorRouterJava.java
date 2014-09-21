@@ -10,8 +10,8 @@ import org.w3c.dom.Document;
 public class AggregatorRouterJava extends RouteBuilder {
     @Override
     public void configure() throws Exception {
-        from("file:./target/scala-2.10/classes/camel/in").convertBodyTo( Document.class ).
+        from("file:./target/classes/camel/in").convertBodyTo( Document.class ).
                 aggregate(new BodyAppenderAggregator()).xpath("/item/@id").completionTimeout(1000).
-                to("file:./target/scala-2.10/classes/camel/out");
+                to("file:./target/classes/camel/out");
     }
 }

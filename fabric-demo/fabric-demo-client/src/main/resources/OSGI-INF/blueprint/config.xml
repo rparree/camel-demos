@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+           xsi:schemaLocation="http://camel.apache.org/schema/blueprint
+           http://camel.apache.org/schema/blueprint/camel-blueprint-2.12.2.xsd">
+
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint" streamCache="true">
+
+        <route>
+            <from uri="file:/tmp/camel-box"/>
+            <log message="Received: ${body}  -> passing on to fabric:demo "/>
+            <to uri="fabric:demo"/>
+        </route>
+    </camelContext>
+
+
+</blueprint>

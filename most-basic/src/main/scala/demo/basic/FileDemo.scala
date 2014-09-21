@@ -11,7 +11,7 @@ import java.nio.file.{FileSystems, Files}
 object FileDemo extends  App {
 
 
-  if (!Files.exists(FileSystems.getDefault.getPath("target", "scala-2.10", "classes", "camel", "in")))
+  if (!Files.exists(FileSystems.getDefault.getPath("target",  "classes", "camel", "in")))
     sys.error("wrong working directory")
 
   // setup camel context

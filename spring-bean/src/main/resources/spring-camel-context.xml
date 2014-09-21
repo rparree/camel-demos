@@ -10,10 +10,10 @@
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <route>
-            <from uri="file:./target/scala-2.10/classes/camel/in"/>
+            <from uri="file:./target/classes/camel/in"/>
             <convertBodyTo type="org.w3c.dom.Document"/>
             <to uri="bean:sampleBean"/>
-            <!-- <to uri="file:./target/scala-2.10/classes/camel/out"/> -->
+            <!-- <to uri="file:./target/classes/camel/out"/> -->
         </route>
     </camelContext>
 
