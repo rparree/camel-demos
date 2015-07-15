@@ -21,6 +21,11 @@ Loading ...
 [info] 11:16:46,227 INFO  route1  - received file file1.xml
 ```
 
+## Jolokia and Hawtio
+
+When running from sbt the [jolokia JVM agent](https://jolokia.org/agent/jvm.html) is enabled. Use either a 
+[standalone hawtio](http://hawt.io/getstarted/#standalone) or use the [Chrome plugin](https://chrome.google.com/webstore/detail/hawtio/aemcedanjggpkpeghpmlmioopekhhppl) to connect with the running process.
+
 ## List of demos
 
  1. **most-basic**: One of the most basic "Hello World"-type of demos.
@@ -33,7 +38,7 @@ Loading ...
  8. **seda-inout**: Shows an netty:tcp endpoint connecting to a seda endpoint inout (for the client open a telnet session: `telnet localhost 7090`)
  9. **jetty-http**: Simple http endpoint, use for example curl to send data:
  ```bash
- me@my-linux> curl -H "Content-Type: text/plain" --data "hello"  http://localhost:9090/myapp/myservice
+     me@my-linux> curl -H "Content-Type: text/plain" --data "hello"  http://localhost:9090/myapp/myservice
  ```
  10. **cxf-spring**: CXF example processing JAX-WS SOAP/HTTP message to JSON/FILE (wsdl available at http://localhost:9090/demo?wsdl)
  11. **cxfrs**: CXFRS demo. Consumes/Produces XML or JSON. CURL commands available in `src/test/bash` directory

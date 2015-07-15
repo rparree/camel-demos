@@ -1,7 +1,7 @@
 import com.typesafe.sbt.osgi.OsgiKeys
 import com.typesafe.sbt.osgi.SbtOsgi._
 import sbt._
-import Keys._
+import sbt.Keys._
 
 object CamelDemosBuild extends Build {
 
@@ -17,7 +17,8 @@ object CamelDemosBuild extends Build {
     crossPaths := false,
     scalacOptions         ++= Seq("-target:jvm-1.7", "-deprecation","-feature"),
     javacOptions in compile ++= Seq("-source", "1.7", "-target", "1.7"),
-    javacOptions in doc     ++= Seq("-source", "1.7")
+    javacOptions in doc     ++= Seq("-source", "1.7"),
+    javaOptions in run ++= Seq(s"-javaagent:${baseDirectory.value}/lib/jolokia-jvm-1.2.3-agent.jar")
   )
   
   import Dependencies._
@@ -73,7 +74,7 @@ object CamelDemosBuild extends Build {
     .settings(
       libraryDependencies ++= compile(osgi, slf4j)
         ++ compile(camelCore,camelJetty,camelScala)
-        ++ test (camelTest, slf4jLog4j)
+        ++ test (camelTest ,slf4jLog4j)
     )
 
     .settings(osgiSettings: _*)
@@ -107,7 +108,8 @@ object CamelDemosBuild extends Build {
       libraryDependencies += slf4j,
       libraryDependencies += slf4jLog4j,
       libraryDependencies ++= activeMQSeq,
-      libraryDependencies ++= Seq(camelCore,camelScala,camelJms,camelSpring,camelFtp,camelNetty,camelCxf,camelJetty),
+      libraryDependencies ++= Seq(camelCore,camelScala,camelJms,camelSpring,camelFtp,camelNetty,camelCxf,camelJetty,camelRx),
+      libraryDependencies ++= test(junit, camelTest),
       fork in run := true
     )
   )
