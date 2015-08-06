@@ -13,13 +13,11 @@ class ParallelMulticastRoute extends RouteBuilder {
 
     // note if this was inout: would have to add strategy(...)
 
-    multicast parallel {
-      to ("class:demo.multicast.parallel.SomeBean?method=baz")
-      to ("class:demo.multicast.parallel.SomeBean?method=bar")
-    }
-
-
-    --> ( "jms:C" )
+multicast parallelProcessing {
+  to("class:demo.multicast.parallel.SomeBean?method=baz")
+  to("class:demo.multicast.parallel.SomeBean?method=bar")
+}
+    -->("jms:C")
   }
 
   "jms:C" log "At C"

@@ -2,7 +2,7 @@ import sbt._
 
 object Dependencies {
 
-  val camelArtifact = (artifact: String) => "org.apache.camel" % artifact % "2.12.2"
+  val camelArtifact = (artifact: String) => "org.apache.camel" % artifact % "2.15.0"
 
   // Camel
   val camelCore= camelArtifact("camel-core")
@@ -14,6 +14,7 @@ object Dependencies {
   val camelCxf= camelArtifact("camel-cxf")
   val camelJetty = camelArtifact("camel-jetty")
   val camelJackson = camelArtifact("camel-jackson")
+  val camelRx = camelArtifact("camel-rx")
   
   // Camel Test
   val camelTest= camelArtifact("camel-test")
@@ -36,7 +37,8 @@ object Dependencies {
 //  val slf4jSeq = Seq("slf4j-api", "slf4j-log4j12").map("org.slf4j" % _ % "1.6.1")
   val grizzled = "org.clapper" %% "grizzled-slf4j" % "1.0.1"
 
-
+  val junit = "junit" % "junit" % "4.11"
+  
   val osgi = "org.osgi" % "org.osgi.core" % "4.3.0"
 
   def compile(deps: ModuleID*): Seq[ModuleID] = deps map (_ % "compile")

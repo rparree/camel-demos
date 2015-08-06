@@ -14,9 +14,7 @@ object SimpleCXFBeanDemo extends App{
 
   context.setRegistry(registry)
 
-  context.addRoutes(new org.apache.camel.scala.dsl.builder.RouteBuilder(){
-    "jetty:http://localhost:9090?matchOnUriPrefix=true" to "cxfbean:demoResource"
-  })
+  context.addRoutes(new RsRoute())
 
   context.start()
   Thread.sleep(50000)
