@@ -18,7 +18,8 @@ object CamelDemosBuild extends Build {
     scalacOptions         ++= Seq("-target:jvm-1.7", "-deprecation","-feature"),
     javacOptions in compile ++= Seq("-source", "1.7", "-target", "1.7"),
     javacOptions in doc     ++= Seq("-source", "1.7"),
-    javaOptions in run ++= Seq(s"-javaagent:../lib/jolokia-jvm-1.2.3-agent.jar")
+    javaOptions in run ++= Seq(s"-javaagent:../lib/jolokia-jvm-1.2.3-agent.jar"),
+    shellPrompt in ThisBuild := { state => Project.extract(state).currentRef.project + "> " }
   )
   
   import Dependencies._
@@ -36,6 +37,7 @@ object CamelDemosBuild extends Build {
     
   lazy val simpleFile = addProject("most-basic") dependsOn common
   lazy val coreCamel = addProject("core-camel") dependsOn  common
+  lazy val camelProps = addProject("camel-properties") dependsOn common
   lazy val simpleSpring = addProject("simple-spring") dependsOn  common
   lazy val simpleFTP = addProject("simple-ftp") dependsOn  common
   lazy val splitter = addProject("splitter") dependsOn  common
@@ -103,13 +105,14 @@ object CamelDemosBuild extends Build {
   def addProject(dirName : String) = Project(id = dirName,
     base = file(dirName),
     settings = Project.defaultSettings ++ Seq(
+      
       libraryDependencies += log4j,
       libraryDependencies += grizzled,
       libraryDependencies += slf4j,
       libraryDependencies += slf4jLog4j,
       libraryDependencies ++= activeMQSeq,
       libraryDependencies ++= Seq(camelCore,camelScala,camelJms,camelSpring,camelFtp,camelNetty,camelCxf,camelJetty,camelRx),
-      libraryDependencies ++= test(junit, camelTest,camelTestSpring),
+      libraryDependencies ++= test(camelTest,camelTestSpring,junitInterface),
       fork in run := true
     )
   )

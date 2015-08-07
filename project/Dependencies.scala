@@ -37,8 +37,8 @@ object Dependencies {
 //  val slf4jSeq = Seq("slf4j-api", "slf4j-log4j12").map("org.slf4j" % _ % "1.6.1")
   val grizzled = "org.clapper" %% "grizzled-slf4j" % "1.0.1"
 
-  val junit = "junit" % "junit" % "4.11"
-  
+ 
+  val junitInterface = "com.novocode" % "junit-interface" % "0.11"
   val osgi = "org.osgi" % "org.osgi.core" % "4.3.0"
 
   def compile(deps: ModuleID*): Seq[ModuleID] = deps map (_ % "compile")
