@@ -38,6 +38,7 @@ object CamelDemosBuild extends Build {
   lazy val simpleFile = addProject("most-basic") dependsOn common
   lazy val coreCamel = addProject("core-camel") dependsOn  common
   lazy val camelProps = addProject("camel-properties") dependsOn common
+  lazy val camelMock = addProject("camel-mock") dependsOn common
   lazy val simpleSpring = addProject("simple-spring") dependsOn  common
   lazy val simpleFTP = addProject("simple-ftp") dependsOn  common
   lazy val splitter = addProject("splitter") dependsOn  common

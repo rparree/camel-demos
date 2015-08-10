@@ -32,6 +32,7 @@ When running from sbt the [jolokia JVM agent](https://jolokia.org/agent/jvm.html
  2. **simple-spring**: Similar "Hello World" using Spring
  3. **core-camel**: Similar to **most-basic**, but shows the default single-thread behaviour (tip surround the steps in `threads(5) { ... }`) or add `?concurrentConsumers=5` to teh URI and includes a unit test.  
  4. **camel-properties**: illustrates use of camel properties
+ 4. **camel-mocks**: illustrates the use of auto mocking existing endpoints
  4. **splitter**: Simple demo using xpath based splitter
  5. **aggregator**: Aggregates an XML message. There is also a Java implementation of the same route, just change the Spring configuration to use the Java equivalent
  6. **simple-ftp**: Idempotent ftp consumer
