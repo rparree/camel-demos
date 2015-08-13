@@ -2,9 +2,9 @@ package demo.pipeline
 
 import java.util
 
+import com.typesafe.scalalogging.LazyLogging
 import org.apache.camel.model.ProcessorDefinition
 import org.apache.camel.test.junit4.CamelTestSupport
-import org.hamcrest.core.Is
 import org.hamcrest.core.Is.is
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -12,7 +12,6 @@ import org.junit.runners.Parameterized.Parameters
 import org.junit.{Assert, Before, Test}
 import org.apache.camel.builder.RouteBuilder
 import java.util.concurrent.TimeUnit
-import grizzled.slf4j.Logging
 import org.apache.camel.{Processor, Exchange, Service}
 import org.apache.camel.impl.DefaultCamelContext
 import scala.collection.JavaConverters._
@@ -23,7 +22,7 @@ object PipeLineDemoTest {
 }
 
 @RunWith(classOf[Parameterized])
-class PipeLineDemoTest(expected : String) extends CamelTestSupport with Logging{
+class PipeLineDemoTest(expected : String) extends CamelTestSupport with LazyLogging{
 
   override def createCamelContext  = {
     val context = new DefaultCamelContext()

@@ -1,21 +1,21 @@
 package demo.multicast.parallel
 
+import com.typesafe.scalalogging.LazyLogging
 import org.apache.camel.Message
-import grizzled.slf4j.Logging
 
 /**
  * todo  
  */
-class SomeBean extends Logging {
+class SomeBean extends LazyLogging {
    def bar(m : Message ) = {
-     info("bar invoked, sleeping 10s")
+     logger.info("bar invoked, sleeping 10s")
      Thread.sleep(10000)
-     info("done with bar")
+     logger.info("done with bar")
    }
 
   def baz(m : Message ) = {
-    info("baz invoked, sleeping 30s")
+    logger.info("baz invoked, sleeping 30s")
     Thread.sleep(30000)
-    info("done with baz")
+    logger.info("done with baz")
   }
 }

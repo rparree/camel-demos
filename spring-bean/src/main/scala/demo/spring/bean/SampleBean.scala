@@ -1,16 +1,15 @@
 package demo.spring.bean
 
+import com.typesafe.scalalogging.{LazyLogging, Logger}
 import org.springframework.stereotype.Component
-import grizzled.slf4j.{Logger, Logging}
+
 import org.apache.camel.{Body, Exchange}
 import org.apache.camel.language.XPath
 import org.w3c.dom.Document
 
 
 @Component
-class SampleBean {
-
-  val logger = Logger[this.type]
+class SampleBean extends LazyLogging {
 
   def processString(body : String ) {
      logger.info (s"processing string: $body")

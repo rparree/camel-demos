@@ -1,6 +1,7 @@
 package demo.seda
 
 import java.nio.file.{FileSystems, Files}
+import org.apache.camel.Exchange
 import org.apache.camel.impl.DefaultCamelContext
 import org.apache.camel.main.Main
 
@@ -24,7 +25,7 @@ object SedaDemo extends  App {
       log ("after a2 ${body}")
     }
     
-    "seda:a" log "received ${body}" process(e => e.getOut.setBody("Some Result from seda route\n" + System.currentTimeMillis()))
+    "seda:a" log "received ${body}" process((e: Exchange) => e.getOut.setBody("Some Result from seda route\n" + System.currentTimeMillis()))
   }.builder)
 
   m.enableHangupSupport()

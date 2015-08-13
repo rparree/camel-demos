@@ -15,6 +15,8 @@ object Dependencies {
   val camelJetty = camelArtifact("camel-jetty")
   val camelJackson = camelArtifact("camel-jackson")
   val camelRx = camelArtifact("camel-rx")
+  val camelXmlJson= camelArtifact("camel-xmljson")
+  val xom = "xom" % "xom" % "1.2.5"
   
   // Camel Test
   val camelTest= camelArtifact("camel-test")
@@ -35,10 +37,14 @@ object Dependencies {
   val slf4j = "org.slf4j" % "slf4j-api" % "1.6.1"
   val slf4jLog4j = "org.slf4j" % "slf4j-log4j12" % "1.6.1"
 //  val slf4jSeq = Seq("slf4j-api", "slf4j-log4j12").map("org.slf4j" % _ % "1.6.1")
-  val grizzled = "org.clapper" %% "grizzled-slf4j" % "1.0.1"
 
+  // Logging
+  val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"
+
+  
  
   val junitInterface = "com.novocode" % "junit-interface" % "0.11"
+  val hamcrestJava = "org.hamcrest" % "java-hamcrest" % "2.0.0.0"
   val osgi = "org.osgi" % "org.osgi.core" % "4.3.0"
 
   def compile(deps: ModuleID*): Seq[ModuleID] = deps map (_ % "compile")

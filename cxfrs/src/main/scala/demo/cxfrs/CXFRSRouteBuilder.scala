@@ -1,5 +1,6 @@
 package demo.cxfrs
 
+import org.apache.camel.Exchange
 import org.apache.camel.scala.dsl.builder.RouteBuilder
 
 /**
@@ -11,7 +12,7 @@ class CXFRSRouteBuilder extends RouteBuilder {
       --> ("log:demo.cxfrs")
 
       // Fake an external service:
-      process (e => e.getOut.setBody(e.getIn.getBody(classOf[Registration]).genActivationCode))
+      process ((e: Exchange) => e.getOut.setBody(e.getIn.getBody(classOf[Registration]).genActivationCode))
 
   }
 

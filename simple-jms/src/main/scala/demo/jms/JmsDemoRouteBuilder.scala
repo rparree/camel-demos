@@ -16,7 +16,7 @@ class JmsDemoRouteBuilder extends RouteBuilder {
     choice{
       when ( _.getIn.getHeader("CamelFileName", classOf[String]).endsWith("xml"))  to "jms:queue/XmlOrders"
       when ( _.getIn.getHeader("CamelFileName", classOf[String]).endsWith("csv"))  to "jms:queue/CsvOrders"
-      otherwise ( to("jms:queue/BadOrders") ) stop
+      otherwise ( to("jms:queue/BadOrders") ).stop
     }
     log ("further processing")
   }

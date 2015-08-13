@@ -9,7 +9,7 @@ object CamelDemosBuild extends Build {
   override lazy val settings = super.settings ++
   Seq(
     fork in run := true,
-    scalaVersion := "2.10.3",
+    scalaVersion := "2.11.7",
     version := "0.1.0-SNAPSHOT",
     publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository"))),
     organization := "com.edc4it",
@@ -19,14 +19,16 @@ object CamelDemosBuild extends Build {
     javacOptions in compile ++= Seq("-source", "1.7", "-target", "1.7"),
     javacOptions in doc     ++= Seq("-source", "1.7"),
     javaOptions in run ++= Seq(s"-javaagent:../lib/jolokia-jvm-1.2.3-agent.jar"),
-    shellPrompt in ThisBuild := { state => Project.extract(state).currentRef.project + "> " }
+    shellPrompt in ThisBuild := { state => Project.extract(state).currentRef.project + "> " },
+    scalacOptions += "-Xexperimental" // for SAM https://github.com/scala/scala/pull/3018
   )
   
   import Dependencies._
 
   lazy val parent = Project(id = "camel-demos-scala-parent",
     base = file(".")
-  ) aggregate(common, simpleFile, coreCamel, simpleSpring, simpleFTP, splitter, simpleJMS, springBean, sedaInOut,
+  ) aggregate(common, camelProps, camelMock, simpleFile, coreCamel, simpleSpring, simpleFTP, splitter, simpleJMS, 
+    springBean, sedaInOut,
     springJMS, simpleJMS, aggregator, parallelMulticast, osgiSpring, http, pipelineProcessorsInout,
     cxfJAXWSSpring, cxfbeanJAXRS, cxfrs, fabricJetty,fabricDemoClientClient )
 
@@ -38,7 +40,8 @@ object CamelDemosBuild extends Build {
   lazy val simpleFile = addProject("most-basic") dependsOn common
   lazy val coreCamel = addProject("core-camel") dependsOn  common
   lazy val camelProps = addProject("camel-properties") dependsOn common
-  lazy val camelMock = addProject("camel-mock") dependsOn common
+  lazy val camelMock = addProject("camel-mock") settings (libraryDependencies ++= Seq(camelXmlJson, xom)) dependsOn 
+    common 
   lazy val simpleSpring = addProject("simple-spring") dependsOn  common
   lazy val simpleFTP = addProject("simple-ftp") dependsOn  common
   lazy val splitter = addProject("splitter") dependsOn  common
@@ -108,12 +111,12 @@ object CamelDemosBuild extends Build {
     settings = Project.defaultSettings ++ Seq(
       
       libraryDependencies += log4j,
-      libraryDependencies += grizzled,
+      libraryDependencies += scalaLogging,
       libraryDependencies += slf4j,
       libraryDependencies += slf4jLog4j,
       libraryDependencies ++= activeMQSeq,
       libraryDependencies ++= Seq(camelCore,camelScala,camelJms,camelSpring,camelFtp,camelNetty,camelCxf,camelJetty,camelRx),
-      libraryDependencies ++= test(camelTest,camelTestSpring,junitInterface),
+      libraryDependencies ++= test(camelTest,camelTestSpring,junitInterface,hamcrestJava),
       fork in run := true
     )
   )

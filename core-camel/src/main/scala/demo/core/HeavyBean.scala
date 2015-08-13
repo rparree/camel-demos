@@ -1,16 +1,16 @@
 package demo.core
 
+import com.typesafe.scalalogging.LazyLogging
 import org.apache.camel.Message
-import grizzled.slf4j.Logging
 
 /**
  * todo  
  */
-class HeavyBean extends Logging {
+class HeavyBean extends LazyLogging {
    def workHard(m : Message ) = {
-     info("starting to work hard for 10s")
+     logger.info("starting to work hard for 10s")
      Thread.sleep(10000)
-     info("done with work")
+     logger.info("done with work")
    }
 
   
