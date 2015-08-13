@@ -17,11 +17,13 @@ object HttpApp extends App {
   context.addRoutes(new org.apache.camel.scala.dsl.builder.RouteBuilder(){
     "jetty:http://localhost:9090/myapp/myservice" 
     .log ("received ${body}") 
-    .process((e: Exchange) => e.getOut.setBody(e.getIn.getBody(classOf[String]).toUpperCase))
+    .process((e: Exchange) => e.out = e.in[String].toUpperCase)
     
   })
 
   context.start()
+  println ("run the following command: curl -H \"Content-Type: text/plain\" --data \"hello\"  " +
+    "http://localhost:9090/myapp/myservice")
   Thread sleep 60000
   context.stop()
 

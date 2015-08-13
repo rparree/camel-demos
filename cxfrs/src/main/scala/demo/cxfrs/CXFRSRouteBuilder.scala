@@ -12,7 +12,7 @@ class CXFRSRouteBuilder extends RouteBuilder {
       --> ("log:demo.cxfrs")
 
       // Fake an external service:
-      process ((e: Exchange) => e.getOut.setBody(e.getIn.getBody(classOf[Registration]).genActivationCode))
+      process ((e: Exchange) => e.out=e.in[Registration].genActivationCode)
 
   }
 

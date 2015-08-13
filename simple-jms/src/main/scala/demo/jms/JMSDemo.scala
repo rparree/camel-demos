@@ -19,7 +19,7 @@ object JMSDemo extends  App {
   val context = new DefaultCamelContext()
   //context.setTracing(true)
   context.addComponent("jms",JmsComponent.jmsComponentAutoAcknowledge(connectionFactory))
-  context.addRoutes(new JmsDemoRouteBuilder())
+  context.addRoutes(new JmsDemoRouteBuilder(context))
 
   // Start and then stop the context
   context.start()

@@ -24,10 +24,10 @@ object Dependencies {
   val camelTestSpring = camelArtifact("camel-test-spring")
   
 
-  // CXF
-  val cxfBundleJaxrs = "org.apache.cxf" % "cxf-bundle-jaxrs" % "2.7.6"
-  val cxfTransportHttpJetty = "org.apache.cxf" % "cxf-rt-transports-http-jetty" % "2.7.6"
-  val jettison = "org.codehaus.jettison" % "jettison" % "1.3.4"
+  // CXF (see https://github.com/apache/camel/blob/master/parent/pom.xml)
+  val cxfBundleJaxrs = "org.apache.cxf" % "cxf-rt-frontend-jaxrs" % "3.1.2"
+  val cxfTransportHttpJetty = "org.apache.cxf" % "cxf-rt-transports-http-jetty" % "3.1.2"
+  val jettison = "org.codehaus.jettison" % "jettison" % "1.3.7"
   
   // ActiveMQ
   val activeMQSeq = Seq("activemq-core", "activemq-spring").map("org.apache.activemq" % _ % "5.7.0") ++ Seq("org.apache.xbean" % "xbean-spring" % "3.7")

@@ -2,6 +2,7 @@ package demo.pipeline
 
 import java.util
 
+import camel.util.scala.CamelTestHelper
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.camel.model.ProcessorDefinition
 import org.apache.camel.test.junit4.CamelTestSupport
@@ -22,7 +23,7 @@ object PipeLineDemoTest {
 }
 
 @RunWith(classOf[Parameterized])
-class PipeLineDemoTest(expected : String) extends CamelTestSupport with LazyLogging{
+class PipeLineDemoTest(expected : String) extends CamelTestSupport with LazyLogging with CamelTestHelper {
 
   override def createCamelContext  = {
     val context = new DefaultCamelContext()
@@ -35,12 +36,12 @@ class PipeLineDemoTest(expected : String) extends CamelTestSupport with LazyLogg
 
 
   override def debugBefore(exchange: Exchange, processor: Processor, definition: ProcessorDefinition[_], id: String, label: String): Unit = {
-    logger.info(s"Before $id with in in.body ${exchange.getIn.getBody()}")
+    logger.info(s"Before $id with in in.body ${exchange.in}")
   }
 
-  val reverseIn2In = (e :Exchange) => e.getIn.setBody(e.getIn.getBody(classOf[String]).reverse)
-  val upperCaseIn2Out = (e :Exchange) => e.getOut.setBody(e.getIn.getBody(classOf[String]).toUpperCase)
-  val replaceInToOut = (e :Exchange) => e.getOut.setBody(e.getIn.getBody(classOf[String]).replaceAll("[oO]", "0"))
+  val reverseIn2In = (e :Exchange) => e.in = e.in[String].reverse
+  val upperCaseIn2Out = (e :Exchange) => e.in = e.in[String].toUpperCase
+  val replaceInToOut = (e :Exchange) => e.in = e.in[String].replaceAll("[oO]", "0")
 
   override def createRouteBuilder(): RouteBuilder = new org.apache.camel.scala.dsl.builder.RouteBuilder(){
     "jetty:http://localhost:9090/myapp/myservice"  ==> {

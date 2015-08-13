@@ -1,18 +1,22 @@
 package aggregator
 
+import com.typesafe.scalalogging.LazyLogging
 import org.apache.camel.processor.aggregate.AggregationStrategy
 import org.apache.camel.Exchange
 import grizzled.slf4j.Logging
 import org.apache.camel.impl.DefaultExchange
+import org.apache.cxf.annotations.Logging
 import org.w3c.dom.{Document, DOMImplementation}
 import org.w3c.dom.bootstrap.DOMImplementationRegistry
 
 /**
  * todo  
  */
-class BodyAppenderAggregator extends AggregationStrategy with Logging {
+class BodyAppenderAggregator extends AggregationStrategy with LazyLogging {
   def aggregate(aggregatedMsg: Exchange, newExchange: Exchange) = {
-    info("Old: " + (if (aggregatedMsg == null) "null" else aggregatedMsg.getIn.getBody(classOf[String])) + ", New: " + newExchange.getIn.getBody(classOf[String]))
+     logger.info("Old: " + (if (aggregatedMsg == null) "null" else aggregatedMsg.getIn.getBody(classOf[String])) + "," +
+       " " +
+      "New: " + newExchange.getIn.getBody(classOf[String]))
 
     if (aggregatedMsg == null) {
       // Initialise DOM 3

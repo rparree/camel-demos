@@ -34,7 +34,9 @@ object CamelDemosBuild extends Build {
 
   lazy val common=  Project(id = "common",
     base = file("common"),
-    settings = Project.defaultSettings 
+    settings = Project.defaultSettings  ++ Seq(
+      libraryDependencies += camelScala
+    )
   ) 
     
   lazy val simpleFile = addProject("most-basic") dependsOn common
