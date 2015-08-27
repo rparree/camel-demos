@@ -1,12 +1,10 @@
 package aggregator
 
 import com.typesafe.scalalogging.LazyLogging
-import org.apache.camel.processor.aggregate.AggregationStrategy
 import org.apache.camel.Exchange
-import grizzled.slf4j.Logging
 import org.apache.camel.impl.DefaultExchange
-import org.apache.cxf.annotations.Logging
-import org.w3c.dom.{Document, DOMImplementation}
+import org.apache.camel.processor.aggregate.AggregationStrategy
+import org.w3c.dom.Document
 import org.w3c.dom.bootstrap.DOMImplementationRegistry
 
 /**

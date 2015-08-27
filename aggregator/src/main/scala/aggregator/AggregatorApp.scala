@@ -1,14 +1,13 @@
 package aggregator
 
-import org.apache.camel.spring.Main
-import java.io.File
-import grizzled.slf4j.Logging
 import java.nio.file.{FileSystems, Files}
+
+import org.apache.camel.spring.Main
 
 /**
  * todo  
  */
-object AggregatorApp extends App with Logging {
+object AggregatorApp extends App  {
 
   if (!Files.exists(FileSystems.getDefault.getPath("target", "classes", "camel", "in","file1.xml")))
     sys.error("wrong working directory")
