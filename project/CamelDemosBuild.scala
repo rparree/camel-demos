@@ -1,7 +1,7 @@
 import com.typesafe.sbt.osgi.OsgiKeys
 import com.typesafe.sbt.osgi.SbtOsgi._
-import sbt._
 import sbt.Keys._
+import sbt._
 
 object CamelDemosBuild extends Build {
 
@@ -61,7 +61,7 @@ object CamelDemosBuild extends Build {
   
   lazy val cxfrs = addProject("cxfrs")
     .settings(
-      libraryDependencies ++= Seq(cxfTransportHttpJetty,cxfBundleJaxrs , jettison) 
+      libraryDependencies ++= Seq(cxfTransportHttpJetty,cxfBundleJaxrs , csfrsExtProv,jettison) 
     ).dependsOn  (common)
  
   lazy val blueprint = Project(id = "blueprint",
