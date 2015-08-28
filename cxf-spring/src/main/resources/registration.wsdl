@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.highview.com/services"
+                  xmlns:tns="http://www.highview.com/services" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:types="http://www.highview.com/types">
+    <wsdl:types>
+        <xs:schema targetNamespace="http://www.highview.com/types" elementFormDefault="qualified"
+                   xmlns:tns="http://www.highview.com/types">
+            <xs:simpleType name="TSimpleEmail">
+                <xs:restriction base="xs:token">
+                    <xs:pattern value="[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:complexType name="TMemberRegistration">
+                <xs:sequence>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="email" type="tns:TSimpleEmail"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="member-registration" type="tns:TMemberRegistration"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="RegistrationRequestMsg">
+        <wsdl:part name="p0" element="types:member-registration"/>
+    </wsdl:message>
+    <wsdl:portType name="RegistrationPortType">
+        <wsdl:operation name="register-new-member">
+            <wsdl:input message="tns:RegistrationRequestMsg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="RegistrationSOAPBinding" type="tns:RegistrationPortType"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="register-new-member">
+            <soap:operation soapAction="register"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="MemberService">
+        <wsdl:port name="RegistrationPort" binding="tns:RegistrationSOAPBinding">
+            <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="none"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
