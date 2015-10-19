@@ -16,7 +16,7 @@
         <route>
             <from uri="cxf:bean:demoEndpoint"/>
              <transform>
-                 <!-- body is a list of SIE parameter values  -->
+                 <!-- body is a list of SEI parameter values  -->
                 <simple>${in.body[0]}</simple>
             </transform>
             <marshal ref="jack"/>

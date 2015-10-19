@@ -51,6 +51,7 @@ When running from sbt the [jolokia JVM agent](https://jolokia.org/agent/jvm.html
  16. **parallelMulticast**: Illustrated (parallel) multicast. A Java version is also included
  17. **osgi-spring**. This demo has its own  ([readme](osgi-spring/readme.md))
  18. **blueprint** Simple Camel blueprint demo with inlined route. Includes a test using mocks
+ 19. **fabric-demo** A camel fabric demo illustrating location transparency and load balancing. This demo has its own  ([readme](fabric-demo/README.md))
 
 
 

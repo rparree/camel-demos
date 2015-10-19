@@ -1,7 +1,5 @@
 import com.typesafe.sbt.osgi.OsgiKeys
 import com.typesafe.sbt.osgi.SbtOsgi._
-import sbt.Keys._
-import sbt._
 
 object CamelDemosBuild extends Build {
 
@@ -10,12 +8,13 @@ object CamelDemosBuild extends Build {
   Seq(
     fork in run := true,
     scalaVersion := "2.11.7",
-    version := "0.1.0-SNAPSHOT",
-    publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository"))),
+    version := "1.0.0-SNAPSHOT",
+    publishTo               := Some("Sonatype Snapshots Nexus" at "http://localhost:8081/content/repositories/snapshots/"),
+    credentials             += Credentials("Sonatype Nexus Repository Manager", "localhost", "admin", "admin123"),
     organization := "com.edc4it",
     startYear := Some(2014),
     crossPaths := false,
-    scalacOptions         ++= Seq("-target:jvm-1.7", "-deprecation","-feature"),
+    scalacOptions         ++= Seq("-target:jvm-1.7", "-deprecation","-feature","-language:implicitConversions"),
     javacOptions in compile ++= Seq("-source", "1.7", "-target", "1.7"),
     javacOptions in doc     ++= Seq("-source", "1.7"),
     javaOptions in run ++= Seq(s"-javaagent:../lib/jolokia-jvm-1.2.3-agent.jar"),
@@ -56,6 +55,7 @@ object CamelDemosBuild extends Build {
   lazy val osgiSpring = addProject("osgi-spring")
   lazy val http = addProject("jetty-http") settings(libraryDependencies += camelJetty)  dependsOn  common
   lazy val pipelineProcessorsInout = addProject("pipeline-processors-inout") settings(libraryDependencies += camelJetty) dependsOn  common
+  lazy val errorHandling= addProject("error-handling") settings(libraryDependencies += camelJetty) dependsOn  common
   lazy val cxfJAXWSSpring = addProject("cxf-spring") settings(libraryDependencies ++= Seq(cxfTransportHttpJetty,camelJackson)) dependsOn  common
   lazy val cxfbeanJAXRS = addProject("cxfbean-jaxrs") settings(libraryDependencies += camelJetty) dependsOn  common
   
@@ -88,7 +88,7 @@ object CamelDemosBuild extends Build {
     .settings(osgiSettings: _*)
     .settings(
       OsgiKeys.privatePackage := Nil,
-      OsgiKeys.importPackage := Seq("org.apache.camel.component.jetty;version=\"[2,3)\"","org.fusesource.fabric.zookeeper")
+      OsgiKeys.importPackage := Seq("org.apache.camel.component.jetty;version=\"[2,3)\"","io.fabric8.zookeeper")
     )
   
 
@@ -104,7 +104,7 @@ object CamelDemosBuild extends Build {
     .settings(osgiSettings: _*)
     .settings(
       OsgiKeys.privatePackage := Nil,
-      OsgiKeys.importPackage := Seq("org.apache.camel.component.jetty;version=\"[2,3)\"","org.fusesource.fabric.zookeeper")
+      OsgiKeys.importPackage := Seq("org.apache.camel.component.jetty;version=\"[2,3)\"","io.fabric8.zookeeper")
     )
 
 

@@ -14,7 +14,7 @@ class HttpRouteTest extends CamelTestSupport {
   @Test
   def exampleTest() : Unit = {
     val response= template.requestBody("jetty:http://localhost:9090/myapp/myservice", "hello", classOf[String])
-    response
+
     Assert.assertThat(response,Is.is("HELLO"))
   }
 }

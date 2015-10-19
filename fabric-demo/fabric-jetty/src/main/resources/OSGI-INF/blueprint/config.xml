@@ -15,7 +15,7 @@
 
     <camelContext xmlns="http://camel.apache.org/schema/blueprint" streamCache="true">
         <route>
-            <from uri="fabric:demo:jetty:http://localhost:{{port}}"/>
+            <from uri="fabric:demo:jetty:http://0.0.0.0:{{port}}"/>
             <transform>
                 <simple>${in.body}@{{suffix}}</simple>
             </transform>
