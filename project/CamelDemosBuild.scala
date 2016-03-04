@@ -1,3 +1,5 @@
+import sbt._
+import Keys._
 import com.typesafe.sbt.osgi.OsgiKeys
 import com.typesafe.sbt.osgi.SbtOsgi._
 
