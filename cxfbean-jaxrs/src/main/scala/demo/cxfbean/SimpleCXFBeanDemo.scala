@@ -1,6 +1,7 @@
 package demo.cxfbean
 
-import org.apache.camel.impl.{SimpleRegistry, DefaultCamelContext}
+import org.apache.camel.impl.{DefaultCamelContext, SimpleRegistry}
+
 import scala.collection.JavaConversions._
 
 /**
@@ -14,7 +15,7 @@ object SimpleCXFBeanDemo extends App{
 
   context.setRegistry(registry)
 
-  context.addRoutes(new RsRoute())
+  context.addRoutes(new RsRoute(context))
 
   context.start()
   Thread.sleep(50000)

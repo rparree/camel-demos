@@ -1,10 +1,10 @@
 package demo.jms
 
 import org.apache.camel.CamelContext
-import org.apache.camel.scala.dsl.builder.{ScalaRouteBuilder, RouteBuilder}
+import org.apache.camel.scala.dsl.builder.ScalaRouteBuilder
 
 /**
- * todo  
+ * todo
  */
 class JmsDemoRouteBuilder(camelContext: CamelContext) extends ScalaRouteBuilder(camelContext) {
 

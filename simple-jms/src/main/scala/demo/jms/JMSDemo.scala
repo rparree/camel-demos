@@ -1,9 +1,8 @@
 package demo.jms
 
-import org.apache.camel.impl.DefaultCamelContext
-
-import org.apache.camel.component.jms.JmsComponent
 import org.apache.activemq.ActiveMQConnectionFactory
+import org.apache.camel.component.jms.JmsComponent
+import org.apache.camel.impl.DefaultCamelContext
 
 
 /**
@@ -12,7 +11,7 @@ import org.apache.activemq.ActiveMQConnectionFactory
 object JMSDemo extends  App {
 
   // Setup ActiveMQ
-  val connectionFactory = new ActiveMQConnectionFactory("vm://localhost")
+  val connectionFactory = new ActiveMQConnectionFactory("vm://mybroker")
 
 
   // setup camel context
