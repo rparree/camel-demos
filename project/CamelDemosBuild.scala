@@ -1,5 +1,7 @@
 import com.typesafe.sbt.osgi.OsgiKeys
 import com.typesafe.sbt.osgi.SbtOsgi._
+import sbt.Keys._
+import sbt._
 
 object CamelDemosBuild extends Build {
 
@@ -58,7 +60,8 @@ object CamelDemosBuild extends Build {
   lazy val errorHandling= addProject("error-handling") settings(libraryDependencies += camelJetty) dependsOn  common
   lazy val cxfJAXWSSpring = addProject("cxf-spring") settings(libraryDependencies ++= Seq(cxfTransportHttpJetty,camelJackson)) dependsOn  common
   lazy val cxfbeanJAXRS = addProject("cxfbean-jaxrs") settings(libraryDependencies += camelJetty) dependsOn  common
-  
+  lazy val enrich = addProject("enrich")  dependsOn  common
+
   lazy val cxfrs = addProject("cxfrs")
     .settings(
       libraryDependencies ++= Seq(cxfTransportHttpJetty,cxfBundleJaxrs , csfrsExtProv,jettison) 
