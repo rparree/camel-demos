@@ -1,28 +1,26 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
-       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 
     <bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
-        <property name="connectionFactory">
-            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
-                <property name="brokerURL" value="vm://mybroker"/>
-            </bean>
-        </property>
+        <property name="connectionFactory" ref="cnf"/>
+        <property name="transacted" value="true"/>
+        <property name="transactionManager" ref="transactionManager"/>
     </bean>
 
 
-    <!--see http://activemq.apache.org/xml-configuration.html-->
-    <broker xmlns="http://activemq.apache.org/schema/core" useShutdownHook="false" useJmx="true"  brokerName="mybroker" dataDirectory="target/activemq-data">
+    <bean id="cnf" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="vm://mybroker"/>
+    </bean>
 
-        <transportConnectors>
-            <transportConnector name="vm" uri="vm://myBroker"/>
-            <transportConnector name="tcp" uri="tcp://0.0.0.0:61616"/>
-        </transportConnectors>
-    </broker>
+
+    <bean id="transactionManager" class="org.springframework.jms.connection.JmsTransactionManager">
+        <property name="connectionFactory" ref="cnf"/>
+    </bean>
+
+    <!--see http://activemq.apache.org/xml-configuration.html-->
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <route>
