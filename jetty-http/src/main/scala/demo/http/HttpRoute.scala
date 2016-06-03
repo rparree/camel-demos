@@ -10,6 +10,6 @@ class HttpRoute(ctx: CamelContext) extends ScalaRouteBuilder(ctx){
   
   
   "jetty:http://localhost:9090/myapp/myservice"
-    .process((e: Exchange) => e.out = e.in[String].toUpperCase)
+    .process((e: Exchange) => e.in = e.in[String].toUpperCase + "!")
 
 }
