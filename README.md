@@ -33,8 +33,9 @@ When running from sbt the [jolokia JVM agent](https://jolokia.org/agent/jvm.html
  3. **core-camel**: Similar to **most-basic**, but shows the default single-thread behaviour (tip surround the steps in `threads(5) { ... }`) or add `?concurrentConsumers=5` to teh URI and includes a unit test.  
  4. **camel-properties**: illustrates use of camel properties
  4. **camel-mocks**: illustrates the use of auto mocking existing endpoints
- 4. **splitter**: Simple demo using xpath based splitter
+ 4. **splitter**: Simple demo using xpath based splitter (also illustrates shared unit of work in case of failure)
  5. **aggregator**: Aggregates an XML message. There is also a Java implementation of the same route, just change the Spring configuration to use the Java equivalent
+ 6. **enrich**: Demo showing enricher with aggregator strategy
  6. **simple-ftp**: Idempotent ftp consumer
  7. **spring-bean**: Shows the use of the bean component in conjunction with the Spring Registry (demo uses a unit test)
  8. **seda-inout**: Shows an netty:tcp endpoint connecting to a seda endpoint inout (for the client open a telnet session: `telnet localhost 7090`)
