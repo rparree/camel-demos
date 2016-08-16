@@ -1,17 +1,16 @@
 package demo.spring.bean
 
-import com.typesafe.scalalogging.{LazyLogging, Logger}
-import org.springframework.stereotype.Component
-
-import org.apache.camel.{Body, Exchange}
+import com.typesafe.scalalogging.LazyLogging
 import org.apache.camel.language.XPath
+import org.apache.camel.{Exchange, Header}
+import org.springframework.stereotype.Component
 import org.w3c.dom.Document
 
 
 @Component
 class SampleBean extends LazyLogging {
 
-  def processString(body : String ) {
+  def processString(body : String, @Header(Exchange.FILE_NAME) fileName : String ) {
      logger.info (s"processing string: $body")
   }
 
