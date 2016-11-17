@@ -10,7 +10,7 @@ import org.apache.camel.scala.dsl.builder.RouteBuilder
 class AggregatorRouterScala extends RouteBuilder  {
 
   "file:./target/classes/camel/in" ==> {
-      convertBodyTo(classOf[org.w3c.dom.Document])
+
 
       aggregate(
         xpath("/item/@id"),
