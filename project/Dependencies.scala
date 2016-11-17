@@ -2,7 +2,8 @@ import sbt._
 
 object Dependencies {
 
-  val camelArtifact = (artifact: String) => "org.apache.camel" % artifact % "2.15.0"
+  val camelArtifact = (artifact: String) => "org.apache.camel" % artifact % "2.17.2"
+  val scalaXml = "org.scala-lang.modules" %% "scala-xml" % "1.0.5"
 
   // Camel
   val camelCore= camelArtifact("camel-core")
@@ -13,9 +14,14 @@ object Dependencies {
   val camelNetty= camelArtifact("camel-netty")
   val camelCxf= camelArtifact("camel-cxf")
   val camelJetty = camelArtifact("camel-jetty")
+  val camelHttp = camelArtifact("camel-http")
   val camelJackson = camelArtifact("camel-jackson")
   val camelRx = camelArtifact("camel-rx")
   val camelXmlJson= camelArtifact("camel-xmljson")
+  val camelSql= camelArtifact("camel-sql")
+  val camelJbpm = camelArtifact("camel-jbpm")
+  val jbpmnSeq = Seq("kie-remote-client").map("org.kie.remote" % _ % "6.3.0.Final") // make sure this version matches version jbpm-verion within parent pom of camel
+
   val xom = "xom" % "xom" % "1.2.5"
   
   // Camel Test
