@@ -1,6 +1,5 @@
 package demo.jms
 
-import org.apache.camel.processor.aggregate.AggregationStrategy
 import org.apache.camel.scala.dsl.builder.ScalaRouteBuilder
 import org.apache.camel.{CamelContext, Exchange}
 
@@ -11,12 +10,10 @@ class EnrichDemoRouteBuilder(camelContext: CamelContext) extends ScalaRouteBuild
 
   "direct:a" ==> {
     log("received message")
-    enrich("direct:b", new AggregationStrategy {
-      override def aggregate(original: Exchange, resource: Exchange): Exchange = {
-        original.out = original.in[String] + " " +  resource.in[String]
-        original
+    enrich("direct:b", (original: Exchange, resource: Exchange) => {
+      original.out = original.in[String] + " " + resource.in[String]
+      original
 
-      }
     })
 
   }
