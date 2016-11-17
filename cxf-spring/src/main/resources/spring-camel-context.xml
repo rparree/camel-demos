@@ -12,29 +12,29 @@
         <dataFormats >
             <json id="jack" library="Jackson"/>
         </dataFormats>
-        
+
         <route>
             <from uri="cxf:bean:demoEndpoint"/>
              <transform>
-                 <!-- body is a list of SEI parameter values  -->
                 <simple>${in.body[0]}</simple>
             </transform>
             <marshal ref="jack"/>
-            <to uri="file:/tmp/camel/out"/> 
+            <to uri="file:/tmp/camel/out"/>
         </route>
-        
+
         <route>
-            <from uri="cxf:http://localhost:9090/raw?dataFormat=PAYLOAD&amp;wsdlURL=registration.wsdl"/>
-            
+            <from uri="cxf:http://localhost:9090/raw?dataFormat=MESSAGE&amp;wsdlURL=registration.wsdl"/>
+
             <log message="${body}"/>
-                    
+
         </route>
     </camelContext>
 
     <!--suppress UnparsedCustomBeanInspection -->
     <cxf:cxfEndpoint id="demoEndpoint"
                      address="http://localhost:9090/demo"
-                     serviceClass="demo.cxf.DemoEndpoint">
+                     serviceClass="demo.cxf.DemoEndpoint"
+                    >
         <cxf:properties>
              <spring:entry key="schema-validation-enabled" value="true"></spring:entry>
         </cxf:properties>
