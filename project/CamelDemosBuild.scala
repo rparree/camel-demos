@@ -11,7 +11,7 @@ object CamelDemosBuild extends Build {
       fork in run := true,
       scalaVersion := "2.11.7",
       version := "1.0.0-SNAPSHOT",
-      publishTo := Some("Sonatype Snapshots Nexus" at "http://localhost:8081/content/repositories/snapshots/"),
+      publishTo := Some("Sonatype Snapshots Nexus" at "http://localhost:8081/repository/snapshots/"),
       credentials += Credentials("Sonatype Nexus Repository Manager", "localhost", "admin", "admin123"),
       organization := "com.edc4it",
       startYear := Some(2014),

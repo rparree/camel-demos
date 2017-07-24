@@ -1,17 +1,20 @@
 package demo.basic
 
-import org.apache.camel.scala.dsl.builder.RouteBuilder
+import org.apache.camel.{CamelContext, Exchange, Processor}
+import org.apache.camel.scala.dsl.builder.{RouteBuilder, ScalaRouteBuilder}
 
 /**
  * todo  
  */
-class FileDemoRouteBuilder extends RouteBuilder {
+class FileDemoRouteBuilder(ctx: CamelContext) extends ScalaRouteBuilder(ctx) {
 
-  "file:target/classes/camel/in?move=processed"  ==>{
-    log ("received file ${file:name}") 
-    transform( xpath("/employee/email/text()") )
-    --> ("file:target/classes/camel/out")
-  } 
+  
+  "file:/tmp/camel/in" ==> {
+    log("received file ${file:name}")
+
+    transform(  xpath("/employee/email/text()"))
+    -->("file:/tmp/camel/out")
+  }
 
 
 }

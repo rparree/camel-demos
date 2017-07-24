@@ -13,7 +13,7 @@ public class AggregatorRouterJava extends RouteBuilder {
         from("file:./target/classes/camel/in").convertBodyTo( Document.class ).
                 aggregate(new BodyAppenderAggregator())
                 .xpath("/item/@id")
-                .completionTimeout(1000).
-                to("file:./target/classes/camel/out");
+                .completionTimeout(1000)
+                .to("file:./target/classes/camel/out");
     }
 }

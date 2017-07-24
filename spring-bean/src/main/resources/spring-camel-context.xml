@@ -13,6 +13,7 @@
             <from uri="file:/tmp/camel/in1"/>
             <convertBodyTo type="org.w3c.dom.Document"/>
             <to uri="bean:sampleBean"/>
+            <log message="body ${body}"/>
             <!-- <to uri="file:./target/classes/camel/out"/> -->
         </route>
     </camelContext>

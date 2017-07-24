@@ -18,7 +18,7 @@ object ParallelMulticastApp extends App {
   // setup camel context
   val context = new DefaultCamelContext()
   context.addComponent("jms",JmsComponent.jmsComponentAutoAcknowledge(connectionFactory))
-  context.addRoutes(new ParallelMulticastRoute())
+  context.addRoutes(new ParallelMulticastRoute(context))
 
   // Start and then stop the context
   context.start()

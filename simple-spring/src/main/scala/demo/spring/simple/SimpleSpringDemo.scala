@@ -8,8 +8,10 @@ import org.apache.camel.spring.Main
  */
 object SimpleSpringDemo extends App{
 
+/*
   if (!Files.exists(FileSystems.getDefault.getPath("target", "classes", "camel", "in")))
     sys.error("wrong working directory")
+*/
 
   val m  = new Main()
   m.setApplicationContextUri("spring-camel-context.xml")

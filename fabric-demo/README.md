@@ -34,7 +34,7 @@ Publish the projects (`fabric-jetty` and `fabric-demo-client`) into nexus
 1. Create a new fabric
 
 ```shell
-fabric:create 
+fabric:create
 ```
 
 2. create two child containers
@@ -53,7 +53,7 @@ fabric:profile-create  fabric-demo-client
 fabric:profile-edit --bundles mvn:com.edc4it/fabric-demo-client/1.0.0-SNAPSHOT fabric-demo-client
 fabric:profile-edit --features camel-jetty fabric-demo-client
 fabric:profile-edit --features fabric-camel fabric-demo-client
-profile-edit --pid io.fabric8.agent/org.ops4j.pax.url.mvn.repositories="http://${nexus.addr}:${nexus.port}/content/repositories/snapshots@id=nexus.snapshot.repo@snapshots" --append fabric-demo-client
+profile-edit --pid io.fabric8.agent/org.ops4j.pax.url.mvn.repositories="http://${nexus.addr}:${nexus.port}/repository/snapshots@id=nexus.snapshot.repo@snapshots" --append fabric-demo-client
 
 fabric:container-add-profile node1 fabric-demo-client
 ```
@@ -61,36 +61,36 @@ fabric:container-add-profile node1 fabric-demo-client
 1. The base for the http services
 
 ```shell
-fabric:profile-create fabric-demo-jetty-base
-fabric:profile-edit --bundles mvn:com.edc4it/fabric-jetty/1.0.0-SNAPSHOT fabric-demo-jetty-base
-fabric:profile-edit --features fabric-zookeeper fabric-demo-jetty-base
-fabric:profile-edit --features camel-jetty fabric-demo-jetty-base
-profile-edit --pid io.fabric8.agent/org.ops4j.pax.url.mvn.repositories="http://${nexus.addr}:${nexus.port}/content/repositories/snapshots@id=nexus.snapshot.repo@snapshots" --append fabric-demo-jetty-base
+fabric:profile-create fabric-demo-jettybase
+fabric:profile-edit --bundles mvn:com.edc4it/fabric-jetty/1.0.0-SNAPSHOT fabric-demo-jettybase
+fabric:profile-edit --features fabric-zookeeper fabric-demo-jettybase
+fabric:profile-edit --features camel-jetty fabric-demo-jettybase
+profile-edit --pid io.fabric8.agent/org.ops4j.pax.url.mvn.repositories="http://${nexus.addr}:${nexus.port}/repository/snapshots@id=nexus.snapshot.repo@snapshots" --append fabric-demo-jettybase
 
 ```
 
 2. http service A
 
 ```shell
-fabric:profile-create --parents fabric-demo-jetty-base fabric-demo-jetty-a
-fabric:profile-edit -p fabric.demo.jetty/port=9092 fabric-demo-jetty-a 
-fabric:profile-edit -p fabric.demo.jetty/suffix=home.com fabric-demo-jetty-a
+fabric:profile-create --parents fabric-demo-jettybase fabric-demo-jettya
+fabric:profile-edit -p fabric.demo.jetty/port=9092 fabric-demo-jettya
+fabric:profile-edit -p fabric.demo.jetty/suffix=home.com fabric-demo-jettya
 
-fabric:container-add-profile node2 fabric-demo-jetty-a
+fabric:container-add-profile node2 fabric-demo-jettya
 ```
 2. http service B
 
 ```shell
-fabric:profile-create --parents fabric-demo-jetty-base fabric-demo-jetty-b
-fabric:profile-edit -p fabric.demo.jetty/port=9093 fabric-demo-jetty-b
-fabric:profile-edit -p fabric.demo.jetty/suffix=work.com fabric-demo-jetty-b
+fabric:profile-create --parents fabric-demo-jettybase fabric-demo-jettyb
+fabric:profile-edit -p fabric.demo.jetty/port=9093 fabric-demo-jettyb
+fabric:profile-edit -p fabric.demo.jetty/suffix=work.com fabric-demo-jettyb
 
-fabric:container-add-profile node1 fabric-demo-jetty-b
+fabric:container-add-profile node1 fabric-demo-jettyb
 ```
 
 ## Test
 
-Tail the child containers' log files 
+Tail the child containers' log files
 
 ```shell
 tail -F instances/node*/data/log/fuse.log | grep test
@@ -101,4 +101,3 @@ Craete some files and watch the log
 ```shell
 echo -n test > /tmp/camel-box/test.txt
 ```
-

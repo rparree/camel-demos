@@ -1,14 +1,15 @@
 package demo.multicast.parallel
 
-import org.apache.camel.scala.dsl.builder.RouteBuilder
+import org.apache.camel.CamelContext
+import org.apache.camel.scala.dsl.builder.{RouteBuilder, ScalaRouteBuilder}
 
 /**
   * todo
   */
-class ParallelMulticastRoute extends RouteBuilder {
+class ParallelMulticastRoute(ctx: CamelContext) extends ScalaRouteBuilder(ctx) {
 
 
-  "direct:foo" ==> {
+    "direct:foo" ==> {
     log("received")
 
     // note if this was inout: would have to add strategy(...)

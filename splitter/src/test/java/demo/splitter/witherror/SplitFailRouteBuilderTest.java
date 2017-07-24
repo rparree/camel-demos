@@ -22,7 +22,7 @@ public class SplitFailRouteBuilderTest  extends CamelTestSupport {
     @Override
     protected CamelContext createCamelContext() throws Exception {
         DefaultCamelContext context = new DefaultCamelContext();
-        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("admin","admin","tcp://0.0.0.0:32774?");
         context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
         return context;
     }
@@ -34,7 +34,7 @@ public class SplitFailRouteBuilderTest  extends CamelTestSupport {
         list.add("two");
         list.add("one");
         String r = template.requestBody("jms:splitFailRoute", list, String.class);
-        System.out.println(r);
+        System.out.append("The value is ").println(r);
 
     }
     @Test

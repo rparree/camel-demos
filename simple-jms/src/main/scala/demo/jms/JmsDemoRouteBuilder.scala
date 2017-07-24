@@ -13,20 +13,26 @@ class JmsDemoRouteBuilder(camelContext: CamelContext) extends ScalaRouteBuilder(
     to ( "jms:queue/IncomingOrders" )
   }
 
-  "jms:queue/IncomingOrders" ==>{
+  "jms:queue/IncomingOrders?concurrentConsumers=5" ==>{
     choice{
-      when ( _.in("CamelFileName").asInstanceOf[String].endsWith("xml"))  to "jms:queue/XmlOrders"
-      when ( _.in("CamelFileName").asInstanceOf[String].endsWith("csv"))  to "jms:queue/CsvOrders"
-      otherwise ( to("jms:queue/BadOrders") ).stop
+      when ( header("CamelFileName").asInstanceOf[String].endsWith("xml"))  to "jms:queue/XmlOrders"
+      when ( header("CamelFileName").asInstanceOf[String].endsWith("csv"))  to "jms:queue/CsvOrders"
+      otherwise ( to("jms:queue/BadOrders") )
     }
     log ("further processing")
   }
 
-  "jms:queue/XmlOrders" when xpath("not(/order/@test)") log "processing an XML order ${body}"
+  "jms:queue/XmlOrders" ==> {
+    when( xpath("not(/order/@test)")) log "processing an XML order ${body}"
+  }
 
-  "jms:queue/CsvOrders" log "processing an CSV order"
+  "jms:queue/CsvOrders" ==> {
+    log("processing an CSV order")
+  }
 
-  "jms:queue/BadOrders" log "dealing with bad order"
+  "jms:queue/BadOrders" ==> {
+    log("dealing with bad order")
+  }
 
 
 
